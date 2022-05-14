@@ -1,6 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
+import userEvent from '@testing-library/user-event';
 
 describe('TDD로 개발하는 counter 앱 만들기', () => {
   test('the counter starts at 0', () => {
@@ -24,7 +25,7 @@ describe('TDD로 개발하는 counter 앱 만들기', () => {
   test('When the - button is pressed, the counter changes to -1', () => {
     render(<App />);
     const buttonElement = screen.getByTestId('minus-button');
-    fireEvent.click(buttonElement);
+    userEvent.click(buttonElement);
     const counterElement = screen.getByTestId('counter');
     expect(counterElement).toHaveTextContent('-1');
   });
@@ -32,7 +33,7 @@ describe('TDD로 개발하는 counter 앱 만들기', () => {
   test('When the + button is pressed, the counter changes to 1', () => {
     render(<App />);
     const buttonElement = screen.getByTestId('plus-button');
-    fireEvent.click(buttonElement);
+    userEvent.click(buttonElement);
     const counterElement = screen.getByTestId('counter');
     expect(counterElement).toHaveTextContent('1');
   });
@@ -46,7 +47,7 @@ describe('TDD로 개발하는 counter 앱 만들기', () => {
   test('Prevent the -,+ button from being pressed when the on/off button is clicked', () => {
     render(<App />);
     const onOffButtonElement = screen.getByTestId('on/off-button');
-    fireEvent.click(onOffButtonElement);
+    userEvent.click(onOffButtonElement);
     const minusButtonElement = screen.getByTestId('minus-button');
     const plusButtonElement = screen.getByTestId('plus-button');
     expect(plusButtonElement).toBeDisabled();
